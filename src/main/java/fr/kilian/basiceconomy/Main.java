@@ -4,6 +4,7 @@ import fr.kilian.basiceconomy.commands.AdminPanelCommand;
 import fr.kilian.basiceconomy.commands.BalanceCommand;
 import fr.kilian.basiceconomy.commands.ShopCommand;
 import fr.kilian.basiceconomy.commands.tabcompleter.ShopTabCompleter;
+import fr.kilian.basiceconomy.listeners.ChatListener;
 import fr.kilian.basiceconomy.listeners.GuiListener;
 import fr.kilian.basiceconomy.listeners.PlayerJoinListener;
 import fr.kilian.basiceconomy.managers.GuiManager;
@@ -40,6 +41,7 @@ public final class Main extends JavaPlugin {
 
         pm.registerEvents(new GuiListener(), this);
         pm.registerEvents(new PlayerJoinListener(), this);
+        pm.registerEvents(new ChatListener(), this);
 
         getCommand("panel").setExecutor(new AdminPanelCommand());
         getCommand("balance").setExecutor(new BalanceCommand());

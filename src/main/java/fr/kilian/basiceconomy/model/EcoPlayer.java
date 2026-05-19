@@ -39,7 +39,7 @@ public class EcoPlayer {
 
     public void debit(double amount){this.balance -= amount;}
 
-    private static String formatMoney(double amount) {
+    public static String formatMoney(double amount) {
         DecimalFormat df = new DecimalFormat("#,###.##");
         df.setGroupingUsed(true);
         return df.format(amount).replace(",", " ");
