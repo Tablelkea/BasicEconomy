@@ -2,3 +2,11 @@ name: BasicEconomy
 version: '1.0'
 main: fr.kilian.basiceconomy.Main
 api-version: '1.21'
+commands:
+  panel:
+    description: show the admin panel
+    permission: op
+  balance:
+    description: show the player balance
+  shop:
+    description: open the shop

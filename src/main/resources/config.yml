@@ -1,0 +1,717 @@
+items:
+
+  # ═══════════════════════════════════════
+  # ORES — Minerais
+  # ═══════════════════════════════════════
+
+  COAL:
+    category: ORES
+    base-price: 4
+    buy-price: 5
+    sell-price: 3
+    current-price: 4
+    demand: 0
+    supply: 0
+
+  COPPER_INGOT:
+    category: ORES
+    base-price: 8
+    buy-price: 10
+    sell-price: 7
+    current-price: 8
+    demand: 0
+    supply: 0
+
+  IRON_INGOT:
+    category: ORES
+    base-price: 18
+    buy-price: 21
+    sell-price: 15
+    current-price: 18
+    demand: 0
+    supply: 0
+
+  GOLD_INGOT:
+    category: ORES
+    base-price: 35
+    buy-price: 41
+    sell-price: 30
+    current-price: 35
+    demand: 0
+    supply: 0
+
+  REDSTONE:
+    category: ORES
+    base-price: 6
+    buy-price: 7
+    sell-price: 5
+    current-price: 6
+    demand: 0
+    supply: 0
+
+  LAPIS_LAZULI:
+    category: ORES
+    base-price: 8
+    buy-price: 10
+    sell-price: 7
+    current-price: 8
+    demand: 0
+    supply: 0
+
+  DIAMOND:
+    category: ORES
+    base-price: 150
+    buy-price: 175
+    sell-price: 130
+    current-price: 150
+    demand: 0
+    supply: 0
+
+  EMERALD:
+    category: ORES
+    base-price: 120
+    buy-price: 140
+    sell-price: 105
+    current-price: 120
+    demand: 0
+    supply: 0
+
+  AMETHYST_SHARD:
+    category: ORES
+    base-price: 12
+    buy-price: 14
+    sell-price: 10
+    current-price: 12
+    demand: 0
+    supply: 0
+
+  # ═══════════════════════════════════════
+  # NETHER
+  # ═══════════════════════════════════════
+
+  QUARTZ:
+    category: NETHER
+    base-price: 10
+    buy-price: 12
+    sell-price: 8
+    current-price: 10
+    demand: 0
+    supply: 0
+
+  BLAZE_ROD:
+    category: NETHER
+    base-price: 45
+    buy-price: 52
+    sell-price: 38
+    current-price: 45
+    demand: 0
+    supply: 0
+
+  BLAZE_POWDER:
+    category: NETHER
+    base-price: 25
+    buy-price: 29
+    sell-price: 21
+    current-price: 25
+    demand: 0
+    supply: 0
+
+  GHAST_TEAR:
+    category: NETHER
+    base-price: 120
+    buy-price: 140
+    sell-price: 105
+    current-price: 120
+    demand: 0
+    supply: 0
+
+  MAGMA_CREAM:
+    category: NETHER
+    base-price: 30
+    buy-price: 35
+    sell-price: 26
+    current-price: 30
+    demand: 0
+    supply: 0
+
+  NETHER_WART:
+    category: NETHER
+    base-price: 15
+    buy-price: 18
+    sell-price: 13
+    current-price: 15
+    demand: 0
+    supply: 0
+
+  ANCIENT_DEBRIS:
+    category: NETHER
+    base-price: 800
+    buy-price: 920
+    sell-price: 700
+    current-price: 800
+    demand: 0
+    supply: 0
+
+  NETHERITE_INGOT:
+    category: NETHER
+    base-price: 3500
+    buy-price: 4000
+    sell-price: 3000
+    current-price: 3500
+    demand: 0
+    supply: 0
+
+  NETHERITE_SCRAP:
+    category: NETHER
+    base-price: 700
+    buy-price: 800
+    sell-price: 610
+    current-price: 700
+    demand: 0
+    supply: 0
+
+  # ═══════════════════════════════════════
+  # END
+  # ═══════════════════════════════════════
+
+  ENDER_PEARL:
+    category: END
+    base-price: 25
+    buy-price: 29
+    sell-price: 21
+    current-price: 25
+    demand: 0
+    supply: 0
+
+  ENDER_EYE:
+    category: END
+    base-price: 60
+    buy-price: 70
+    sell-price: 52
+    current-price: 60
+    demand: 0
+    supply: 0
+
+  SHULKER_SHELL:
+    category: END
+    base-price: 200
+    buy-price: 230
+    sell-price: 175
+    current-price: 200
+    demand: 0
+    supply: 0
+
+  CHORUS_FRUIT:
+    category: END
+    base-price: 12
+    buy-price: 14
+    sell-price: 10
+    current-price: 12
+    demand: 0
+    supply: 0
+
+  DRAGON_BREATH:
+    category: END
+    base-price: 250
+    buy-price: 290
+    sell-price: 220
+    current-price: 250
+    demand: 0
+    supply: 0
+
+  ELYTRA:
+    category: END
+    base-price: 8000
+    buy-price: 9200
+    sell-price: 7000
+    current-price: 8000
+    demand: 0
+    supply: 0
+
+  # ═══════════════════════════════════════
+  # WOOD — Bois
+  # ═══════════════════════════════════════
+
+  OAK_LOG:
+    category: WOOD
+    base-price: 5
+    buy-price: 6
+    sell-price: 4
+    current-price: 5
+    demand: 0
+    supply: 0
+
+  SPRUCE_LOG:
+    category: WOOD
+    base-price: 5
+    buy-price: 6
+    sell-price: 4
+    current-price: 5
+    demand: 0
+    supply: 0
+
+  BIRCH_LOG:
+    category: WOOD
+    base-price: 5
+    buy-price: 6
+    sell-price: 4
+    current-price: 5
+    demand: 0
+    supply: 0
+
+  JUNGLE_LOG:
+    category: WOOD
+    base-price: 6
+    buy-price: 7
+    sell-price: 5
+    current-price: 6
+    demand: 0
+    supply: 0
+
+  ACACIA_LOG:
+    category: WOOD
+    base-price: 6
+    buy-price: 7
+    sell-price: 5
+    current-price: 6
+    demand: 0
+    supply: 0
+
+  DARK_OAK_LOG:
+    category: WOOD
+    base-price: 7
+    buy-price: 8
+    sell-price: 6
+    current-price: 7
+    demand: 0
+    supply: 0
+
+  MANGROVE_LOG:
+    category: WOOD
+    base-price: 8
+    buy-price: 10
+    sell-price: 7
+    current-price: 8
+    demand: 0
+    supply: 0
+
+  CHERRY_LOG:
+    category: WOOD
+    base-price: 10
+    buy-price: 12
+    sell-price: 9
+    current-price: 10
+    demand: 0
+    supply: 0
+
+  # ═══════════════════════════════════════
+  # FOOD — Nourriture
+  # ═══════════════════════════════════════
+
+  WHEAT:
+    category: FOOD
+    base-price: 3
+    buy-price: 4
+    sell-price: 2
+    current-price: 3
+    demand: 0
+    supply: 0
+
+  CARROT:
+    category: FOOD
+    base-price: 3
+    buy-price: 4
+    sell-price: 2
+    current-price: 3
+    demand: 0
+    supply: 0
+
+  POTATO:
+    category: FOOD
+    base-price: 3
+    buy-price: 4
+    sell-price: 2
+    current-price: 3
+    demand: 0
+    supply: 0
+
+  BEETROOT:
+    category: FOOD
+    base-price: 3
+    buy-price: 4
+    sell-price: 2
+    current-price: 3
+    demand: 0
+    supply: 0
+
+  APPLE:
+    category: FOOD
+    base-price: 7
+    buy-price: 8
+    sell-price: 6
+    current-price: 7
+    demand: 0
+    supply: 0
+
+  BREAD:
+    category: FOOD
+    base-price: 6
+    buy-price: 7
+    sell-price: 5
+    current-price: 6
+    demand: 0
+    supply: 0
+
+  COOKED_BEEF:
+    category: FOOD
+    base-price: 12
+    buy-price: 14
+    sell-price: 10
+    current-price: 12
+    demand: 0
+    supply: 0
+
+  COOKED_CHICKEN:
+    category: FOOD
+    base-price: 9
+    buy-price: 11
+    sell-price: 8
+    current-price: 9
+    demand: 0
+    supply: 0
+
+  COOKED_PORKCHOP:
+    category: FOOD
+    base-price: 10
+    buy-price: 12
+    sell-price: 9
+    current-price: 10
+    demand: 0
+    supply: 0
+
+  GOLDEN_CARROT:
+    category: FOOD
+    base-price: 40
+    buy-price: 46
+    sell-price: 34
+    current-price: 40
+    demand: 0
+    supply: 0
+
+  GOLDEN_APPLE:
+    category: FOOD
+    base-price: 80
+    buy-price: 92
+    sell-price: 70
+    current-price: 80
+    demand: 0
+    supply: 0
+
+  ENCHANTED_GOLDEN_APPLE:
+    category: FOOD
+    base-price: 2000
+    buy-price: 2300
+    sell-price: 1750
+    current-price: 2000
+    demand: 0
+    supply: 0
+
+  # ═══════════════════════════════════════
+  # MOB_DROPS
+  # ═══════════════════════════════════════
+
+  STRING:
+    category: MOB_DROPS
+    base-price: 5
+    buy-price: 6
+    sell-price: 4
+    current-price: 5
+    demand: 0
+    supply: 0
+
+  GUNPOWDER:
+    category: MOB_DROPS
+    base-price: 14
+    buy-price: 16
+    sell-price: 12
+    current-price: 14
+    demand: 0
+    supply: 0
+
+  SLIME_BALL:
+    category: MOB_DROPS
+    base-price: 15
+    buy-price: 18
+    sell-price: 13
+    current-price: 15
+    demand: 0
+    supply: 0
+
+  SPIDER_EYE:
+    category: MOB_DROPS
+    base-price: 10
+    buy-price: 12
+    sell-price: 9
+    current-price: 10
+    demand: 0
+    supply: 0
+
+  BONE:
+    category: MOB_DROPS
+    base-price: 5
+    buy-price: 6
+    sell-price: 4
+    current-price: 5
+    demand: 0
+    supply: 0
+
+  ROTTEN_FLESH:
+    category: MOB_DROPS
+    base-price: 2
+    buy-price: 3
+    sell-price: 1
+    current-price: 2
+    demand: 0
+    supply: 0
+
+  ARROW:
+    category: MOB_DROPS
+    base-price: 3
+    buy-price: 4
+    sell-price: 2
+    current-price: 3
+    demand: 0
+    supply: 0
+
+  FEATHER:
+    category: MOB_DROPS
+    base-price: 4
+    buy-price: 5
+    sell-price: 3
+    current-price: 4
+    demand: 0
+    supply: 0
+
+  LEATHER:
+    category: MOB_DROPS
+    base-price: 8
+    buy-price: 10
+    sell-price: 7
+    current-price: 8
+    demand: 0
+    supply: 0
+
+  INK_SAC:
+    category: MOB_DROPS
+    base-price: 6
+    buy-price: 7
+    sell-price: 5
+    current-price: 6
+    demand: 0
+    supply: 0
+
+  PHANTOM_MEMBRANE:
+    category: MOB_DROPS
+    base-price: 50
+    buy-price: 58
+    sell-price: 43
+    current-price: 50
+    demand: 0
+    supply: 0
+
+  TOTEM_OF_UNDYING:
+    category: MOB_DROPS
+    base-price: 1500
+    buy-price: 1725
+    sell-price: 1300
+    current-price: 1500
+    demand: 0
+    supply: 0
+
+  WITHER_SKELETON_SKULL:
+    category: MOB_DROPS
+    base-price: 600
+    buy-price: 690
+    sell-price: 520
+    current-price: 600
+    demand: 0
+    supply: 0
+
+  NETHER_STAR:
+    category: MOB_DROPS
+    base-price: 5000
+    buy-price: 5750
+    sell-price: 4300
+    current-price: 5000
+    demand: 0
+    supply: 0
+
+  # ═══════════════════════════════════════
+  # FARMING
+  # ═══════════════════════════════════════
+
+  SUGAR_CANE:
+    category: FARMING
+    base-price: 4
+    buy-price: 5
+    sell-price: 3
+    current-price: 4
+    demand: 0
+    supply: 0
+
+  CACTUS:
+    category: FARMING
+    base-price: 3
+    buy-price: 4
+    sell-price: 2
+    current-price: 3
+    demand: 0
+    supply: 0
+
+  BAMBOO:
+    category: FARMING
+    base-price: 3
+    buy-price: 4
+    sell-price: 2
+    current-price: 3
+    demand: 0
+    supply: 0
+
+  PUMPKIN:
+    category: FARMING
+    base-price: 8
+    buy-price: 10
+    sell-price: 7
+    current-price: 8
+    demand: 0
+    supply: 0
+
+  MELON_SLICE:
+    category: FARMING
+    base-price: 3
+    buy-price: 4
+    sell-price: 2
+    current-price: 3
+    demand: 0
+    supply: 0
+
+  HONEY_BOTTLE:
+    category: FARMING
+    base-price: 18
+    buy-price: 21
+    sell-price: 15
+    current-price: 18
+    demand: 0
+    supply: 0
+
+  HONEYCOMB:
+    category: FARMING
+    base-price: 12
+    buy-price: 14
+    sell-price: 10
+    current-price: 12
+    demand: 0
+    supply: 0
+
+  # ═══════════════════════════════════════
+  # BLOCKS
+  # ═══════════════════════════════════════
+
+  STONE:
+    category: BLOCKS
+    base-price: 2
+    buy-price: 3
+    sell-price: 1
+    current-price: 2
+    demand: 0
+    supply: 0
+
+  COBBLESTONE:
+    category: BLOCKS
+    base-price: 1
+    buy-price: 2
+    sell-price: 1
+    current-price: 1
+    demand: 0
+    supply: 0
+
+  SAND:
+    category: BLOCKS
+    base-price: 3
+    buy-price: 4
+    sell-price: 2
+    current-price: 3
+    demand: 0
+    supply: 0
+
+  GRAVEL:
+    category: BLOCKS
+    base-price: 2
+    buy-price: 3
+    sell-price: 1
+    current-price: 2
+    demand: 0
+    supply: 0
+
+  DIRT:
+    category: BLOCKS
+    base-price: 1
+    buy-price: 2
+    sell-price: 1
+    current-price: 1
+    demand: 0
+    supply: 0
+
+  OBSIDIAN:
+    category: BLOCKS
+    base-price: 30
+    buy-price: 35
+    sell-price: 26
+    current-price: 30
+    demand: 0
+    supply: 0
+
+  GLASS:
+    category: BLOCKS
+    base-price: 3
+    buy-price: 4
+    sell-price: 2
+    current-price: 3
+    demand: 0
+    supply: 0
+
+  CLAY_BALL:
+    category: BLOCKS
+    base-price: 4
+    buy-price: 5
+    sell-price: 3
+    current-price: 4
+    demand: 0
+    supply: 0
+
+  TERRACOTTA:
+    category: BLOCKS
+    base-price: 5
+    buy-price: 6
+    sell-price: 4
+    current-price: 5
+    demand: 0
+    supply: 0
+
+  ICE:
+    category: BLOCKS
+    base-price: 6
+    buy-price: 7
+    sell-price: 5
+    current-price: 6
+    demand: 0
+    supply: 0
+
+  PACKED_ICE:
+    category: BLOCKS
+    base-price: 15
+    buy-price: 18
+    sell-price: 13
+    current-price: 15
+    demand: 0
+    supply: 0

@@ -1,6 +1,8 @@
 package fr.kilian.basiceconomy.model;
 
 import org.bukkit.entity.Player;
+import org.jspecify.annotations.NonNull;
+import java.text.DecimalFormat;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +15,7 @@ public class EcoPlayer {
     private final Player player;
     private double balance;
 
-    public EcoPlayer(Player player, double balance){
+    public EcoPlayer(@NonNull Player player, double balance){
         this.player = player;
         this.balance = balance;
 
@@ -22,9 +24,24 @@ public class EcoPlayer {
 
     public Player getPlayer() {return player;}
 
-    public double getBalance() {return balance;}
+    public String getStringBalance(){
+        return formatMoney(getBalance());
+    }
+
+    public double getBalance() {
+        return balance;}
+
+    public void setBalance(double balance){
+        this.balance = balance;
+    }
 
     public void credit(double amount){this.balance += amount;}
 
     public void debit(double amount){this.balance -= amount;}
+
+    private static String formatMoney(double amount) {
+        DecimalFormat df = new DecimalFormat("#,###.##");
+        df.setGroupingUsed(true);
+        return df.format(amount).replace(",", " ");
+    }
 }
