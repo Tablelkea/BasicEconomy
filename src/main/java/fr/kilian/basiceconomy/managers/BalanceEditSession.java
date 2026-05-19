@@ -22,8 +22,6 @@ public class BalanceEditSession {
     public String   getTargetName() { return targetName; }
     public EditType getEditType()   { return editType;   }
 
-    // -------------------------------------------------------------------------
-
     private static final Map<UUID, BalanceEditSession> pending = new HashMap<>();
 
     public static void put(UUID adminUuid, UUID targetUuid, String targetName, EditType editType) {

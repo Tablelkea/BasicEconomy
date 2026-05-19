@@ -1,5 +1,6 @@
 package fr.kilian.basiceconomy.managers;
 
+import fr.kilian.basiceconomy.Main;
 import fr.kilian.basiceconomy.model.EcoPlayer;
 import fr.kilian.basiceconomy.model.ItemMarket;
 import fr.kilian.basiceconomy.model.enums.Category;
@@ -25,7 +26,6 @@ public class GuiManager {
 
     public final Map<Material, ItemStack> clickableItem = new HashMap<>();
 
-    // Titles
     public static final String ADMIN_PANEL_TITLE    = "✦ Panel Administrateur";
     public static final String SHOP_TITLE           = "✦ Boutique";
     public static final String SHOP_CATEGORY_PREFIX = "✦ Boutique • ";
@@ -142,7 +142,7 @@ public class GuiManager {
 
 
         for (ItemMarket item : ItemMarket.itemsMarket.values()) {
-            if (item.getCategory() == category) {
+            if (item.getCategory() == category && !Main.getInstance().getMarketManager().isDisable(item)) {
                 inventory.addItem(createMarketItemstack(item));
             }
         }
@@ -307,22 +307,83 @@ public class GuiManager {
         return inventory;
     }
 
-    public Inventory allArticles() {
+    public Inventory allArticles(int page) {
         Inventory inventory = Bukkit.createInventory(
                 null,
                 54,
-                Component.text(ALL_ARTICLES_TITLE)
+                Component.text(ALL_ARTICLES_TITLE + " • " + (page + 1))
                         .color(NamedTextColor.GOLD)
                         .decoration(TextDecoration.BOLD, true)
         );
 
         fill(inventory);
 
-        int slot = 0;
+        List<ItemMarket> items = ItemMarket.itemsMarket.values()
+                .stream()
+                .toList();
 
-        for (ItemMarket item : ItemMarket.itemsMarket.values()) {
-            if (slot >= inventory.getSize()) break;
-            inventory.setItem(slot++, createAdminMarketItemstack(item));
+        int itemsPerPage = 45;
+        int start = page * itemsPerPage;
+        int end = Math.min(start + itemsPerPage, items.size());
+
+        // items
+        int slot = 0;
+        for (int i = start; i < end; i++) {
+            ItemStack it = createAdminMarketItemstack(items.get(i));
+            if(Main.getInstance().getMarketManager().isDisable(items.get(i))){
+                it.editMeta(meta -> {
+                    List<Component> lore = meta.lore();
+
+                    if (lore == null) {
+                        lore = new ArrayList<>();
+                    }
+
+                    lore.add(Component.empty());
+                    lore.add(
+                            Component.text("✘ Cet article est désactivé.")
+                                    .color(NamedTextColor.RED)
+                                    .decoration(TextDecoration.ITALIC, false)
+                    );
+
+                    meta.lore(lore); // IMPORTANT
+                });
+            }
+            inventory.setItem(slot++, it);
+        }
+
+        // bouton précédent
+        if (page > 0) {
+            inventory.setItem(45, createCustomItemstack(
+                    Material.ARROW,
+                    1,
+                    title("Page précédente"),
+                    List.of(action("Clique pour revenir")),
+                    false
+            ));
+        }
+
+        // info page
+        int maxPage = (int) Math.ceil((double) items.size() / itemsPerPage);
+
+        inventory.setItem(49, createCustomItemstack(
+                Material.BOOK,
+                1,
+                title("Page " + (page + 1)),
+                List.of(
+                        lore("Total : " + maxPage + " pages")
+                ),
+                false
+        ));
+
+        // bouton suivant
+        if (end < items.size()) {
+            inventory.setItem(53, createCustomItemstack(
+                    Material.ARROW,
+                    1,
+                    title("Page suivante"),
+                    List.of(action("Clique pour avancer")),
+                    false
+            ));
         }
 
         return inventory;
@@ -377,6 +438,14 @@ public class GuiManager {
         }
 
         return sb.toString().trim();
+    }
+
+    public int extractPage(String title) {
+        try {
+            return Integer.parseInt(title.split("•")[1].trim()) - 1;
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Contract(pure = true)

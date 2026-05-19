@@ -10,23 +10,29 @@ import fr.kilian.basiceconomy.model.enums.Category;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class GuiListener implements Listener {
+import java.util.ArrayList;
+import java.util.List;
 
-    // -------------------------------------------------------------------------
-    // Dispatcher principal
-    // -------------------------------------------------------------------------
+public class GuiListener implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent event) {
+
+        Player player = (Player) event.getWhoClicked();
+
         if (event.getCurrentItem() == null) return;
         if (event.getCurrentItem().getType() == Material.AIR) return;
         if (event.getCurrentItem().getType() == Material.GRAY_STAINED_GLASS_PANE) {
@@ -38,21 +44,33 @@ public class GuiListener implements Listener {
 
         if      (title.equals(GuiManager.ADMIN_PANEL_TITLE))        handleAdminPanel(event);
         else if (title.equals(GuiManager.SHOP_TITLE))               handleShop(event);
-        else if (title.equals(GuiManager.ALL_ARTICLES_TITLE))       handleAllArticles(event);
+        else if (title.startsWith(GuiManager.ALL_ARTICLES_TITLE)) handleAllArticles(event);
         else if (title.startsWith(GuiManager.SHOP_CATEGORY_PREFIX)) handleShopCategory(event);
         else if (title.equals(GuiManager.ALL_PLAYERS_TITLE)) handleAllPlayers(event);
         else if (title.equals(GuiManager.ALL_CATEGORY_TITLE)) {
             event.setCancelled(true);
+        }
+
+        ItemStack current = event.getCurrentItem();
+        if (title.startsWith(GuiManager.ALL_ARTICLES_TITLE)) {
+
+            int currentPage = getGui().extractPage(title);
+
+            if (current.getType() == Material.ARROW) {
+
+                if(event.getSlot() == 53){
+                    getGui().open(player, getGui().allArticles(currentPage + 1));
+
+                }else if(event.getSlot() == 45){
+                    getGui().open(player, getGui().allArticles(currentPage - 1));
+                }
+            }
         }
     }
 
     private String stripColor(String input) {
         return input.replaceAll("§[0-9a-fk-orA-FK-OR]", "");
     }
-
-    // -------------------------------------------------------------------------
-    // Handlers
-    // -------------------------------------------------------------------------
 
     private void handleAdminPanel(InventoryClickEvent event) {
         event.setCancelled(true);
@@ -65,7 +83,7 @@ public class GuiListener implements Listener {
         switch (type) {
             case PLAYER_HEAD -> getGui().open(player, getGui().allPlayersBalance());
             case CHEST       -> getGui().open(player, getGui().allCategory());
-            case GOLD_INGOT  -> getGui().open(player, getGui().allArticles());
+            case GOLD_INGOT  -> getGui().open(player, getGui().allArticles(0));
             default          -> {}
         }
     }
@@ -95,29 +113,61 @@ public class GuiListener implements Listener {
         Material type = getClickedType(event);
         if (type == null) return;
 
+        if (type == Material.ARROW || type == Material.BOOK) {
+            return;
+        }
+
         ItemMarket itemMarket = ItemMarket.itemsMarket.get(type);
         if (itemMarket == null) return;
 
         Player   player     = (Player) event.getWhoClicked();
         boolean  isLeft     = event.getClick().isLeftClick();
-        EditType editType   = isLeft ? EditType.BUY : EditType.SELL;
-        String   priceLabel = isLeft ? "achat" : "vente";
+        ItemStack current = event.getCurrentItem();
 
-        PriceEditSession.put(player.getUniqueId(), itemMarket, editType);
-        player.closeInventory();
+        if (event.getClick() == ClickType.DROP) {
+            if(getMarket().isDisable(itemMarket)) {
+                getMarket().enableItem(itemMarket);
+                player.closeInventory();
+                getGui().open(player, getGui().allArticles(0));
+            } else{
+                getMarket().disableItem(itemMarket);
+                current.editMeta(meta -> {
+                    List<Component> lore = meta.lore();
 
-        player.sendMessage(Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━").color(NamedTextColor.GOLD));
-        player.sendMessage(Component.text(" ✦ Modification de prix")
-                .color(NamedTextColor.GOLD).decoration(TextDecoration.BOLD, true));
-        player.sendMessage(Component.text(" Article : ").color(NamedTextColor.GRAY)
-                .append(Component.text(type.name()).color(NamedTextColor.WHITE)));
-        player.sendMessage(Component.text(" Prix cible : ").color(NamedTextColor.GRAY)
-                .append(Component.text(priceLabel).color(NamedTextColor.YELLOW)));
-        player.sendMessage(Component.text(" ▶ Tape le nouveau prix dans le chat.").color(NamedTextColor.AQUA));
-        player.sendMessage(Component.text(" ▶ Tape ").color(NamedTextColor.AQUA)
-                .append(Component.text("annuler").color(NamedTextColor.RED))
-                .append(Component.text(" pour abandonner.").color(NamedTextColor.AQUA)));
-        player.sendMessage(Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━").color(NamedTextColor.GOLD));
+                    if (lore == null) {
+                        lore = new ArrayList<>();
+                    }
+
+                    lore.add(Component.empty());
+                    lore.add(
+                            Component.text("✘ Cet article est désactivé.")
+                                    .color(NamedTextColor.RED)
+                                    .decoration(TextDecoration.ITALIC, false)
+                    );
+
+                    meta.lore(lore); // IMPORTANT
+                });
+            }
+        }else{
+            EditType editType   = isLeft ? EditType.BUY : EditType.SELL;
+            String   priceLabel = isLeft ? "achat" : "vente";
+
+            PriceEditSession.put(player.getUniqueId(), itemMarket, editType);
+            player.closeInventory();
+
+            player.sendMessage(Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━").color(NamedTextColor.GOLD));
+            player.sendMessage(Component.text(" ✦ Modification de prix")
+                    .color(NamedTextColor.GOLD).decoration(TextDecoration.BOLD, true));
+            player.sendMessage(Component.text(" Article : ").color(NamedTextColor.GRAY)
+                    .append(Component.text(type.name()).color(NamedTextColor.WHITE)));
+            player.sendMessage(Component.text(" Prix cible : ").color(NamedTextColor.GRAY)
+                    .append(Component.text(priceLabel).color(NamedTextColor.YELLOW)));
+            player.sendMessage(Component.text(" ▶ Tape le nouveau prix dans le chat.").color(NamedTextColor.AQUA));
+            player.sendMessage(Component.text(" ▶ Tape ").color(NamedTextColor.AQUA)
+                    .append(Component.text("annuler").color(NamedTextColor.RED))
+                    .append(Component.text(" pour abandonner.").color(NamedTextColor.AQUA)));
+            player.sendMessage(Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━").color(NamedTextColor.GOLD));
+        }
     }
 
     private void handleShopCategory(InventoryClickEvent event) {
@@ -170,27 +220,25 @@ public class GuiListener implements Listener {
                 .color(NamedTextColor.GOLD));
     }
 
-    // Remplace le bloc lecture seule ALL_PLAYERS_TITLE par le handler ci-dessous :
     private void handleAllPlayers(InventoryClickEvent event) {
         event.setCancelled(true);
 
         Material type = getClickedType(event);
         if (type != Material.PLAYER_HEAD) return;
 
-        // Récupère le nom du joueur depuis le displayName de l'item
         ItemStack item = event.getCurrentItem();
         if (item == null || !item.hasItemMeta()) return;
 
-        String targetName = net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
+        String targetName = PlainTextComponentSerializer
                 .plainText()
                 .serialize(item.getItemMeta().displayName());
 
-        org.bukkit.entity.Player target = org.bukkit.Bukkit.getPlayer(targetName);
+        Player target = Bukkit.getPlayer(targetName);
         if (target == null) return;
 
         Player  admin    = (Player) event.getWhoClicked();
         boolean isLeft   = event.getClick().isLeftClick();
-        boolean isMiddle = event.getClick() == org.bukkit.event.inventory.ClickType.MIDDLE;
+        boolean isMiddle = event.getClick() == ClickType.MIDDLE;
 
         BalanceEditSession.EditType editType;
         String label;
@@ -228,15 +276,10 @@ public class GuiListener implements Listener {
         admin.sendMessage(Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━").color(NamedTextColor.GOLD));
     }
 
-    // -------------------------------------------------------------------------
-    // Chat listener
-    // -------------------------------------------------------------------------
-
     @EventHandler(priority = EventPriority.LOWEST)
     public void onChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
 
-        // Priorité à la session admin (prix)
         if (PriceEditSession.hasPending(player.getUniqueId())) {
             handlePriceChat(event, player);
             return;
@@ -295,7 +338,7 @@ public class GuiListener implements Listener {
                 .append(Component.text(newPrice + "$").color(NamedTextColor.GREEN)));
 
         Main.getInstance().getServer().getScheduler().runTask(Main.getInstance(), () ->
-                getGui().open(player, getGui().allArticles())
+                getGui().open(player, getGui().allArticles(0))
         );
     }
 

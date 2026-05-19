@@ -3,6 +3,7 @@ package fr.kilian.basiceconomy;
 import fr.kilian.basiceconomy.commands.AdminPanelCommand;
 import fr.kilian.basiceconomy.commands.BalanceCommand;
 import fr.kilian.basiceconomy.commands.ShopCommand;
+import fr.kilian.basiceconomy.commands.tabcompleter.ShopTabCompleter;
 import fr.kilian.basiceconomy.listeners.GuiListener;
 import fr.kilian.basiceconomy.listeners.PlayerJoinListener;
 import fr.kilian.basiceconomy.managers.GuiManager;
@@ -43,6 +44,8 @@ public final class Main extends JavaPlugin {
         getCommand("panel").setExecutor(new AdminPanelCommand());
         getCommand("balance").setExecutor(new BalanceCommand());
         getCommand("shop").setExecutor(new ShopCommand());
+
+        getCommand("shop").setTabCompleter(new ShopTabCompleter());
 
         ItemMarket.items = readConfig.read();
         // Plugin startup logic

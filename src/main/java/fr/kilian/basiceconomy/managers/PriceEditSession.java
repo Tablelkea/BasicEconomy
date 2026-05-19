@@ -6,10 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Holds the state of a pending price-edit for a given player.
- * Stored in GuiManager so no extra singleton is needed.
- */
 public class PriceEditSession {
 
     public enum EditType { BUY, SELL }
@@ -25,9 +21,6 @@ public class PriceEditSession {
     public ItemMarket getItemMarket() { return itemMarket; }
     public EditType   getEditType()   { return editType;   }
 
-    // ── Static registry ──────────────────────────────────────────────────────
-
-    /** UUID → pending session */
     public static final Map<UUID, PriceEditSession> pending = new HashMap<>();
 
     public static boolean hasPending(UUID uuid)                        { return pending.containsKey(uuid); }

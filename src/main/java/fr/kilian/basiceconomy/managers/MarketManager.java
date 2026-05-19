@@ -89,6 +89,10 @@ public class MarketManager {
         disableItem.remove(item);
     }
 
+    public boolean isDisable(ItemMarket item){
+        return disableItem.contains(item);
+    }
+
     public double calcBuyPrice(@NonNull ItemMarket item, int amount){
         return item.getBuyPrice()*amount;
     }

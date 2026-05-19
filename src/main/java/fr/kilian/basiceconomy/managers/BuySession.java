@@ -21,8 +21,6 @@ public class BuySession {
     public ItemMarket getItemMarket() { return itemMarket; }
     public TradeType  getTradeType()  { return tradeType;  }
 
-    // -------------------------------------------------------------------------
-
     private static final Map<UUID, BuySession> pending = new HashMap<>();
 
     public static void put(UUID uuid, ItemMarket itemMarket, TradeType tradeType) {
