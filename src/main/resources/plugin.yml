@@ -1,0 +1,4 @@
+name: BasicEconomy
+version: '1.0'
+main: fr.kilian.basiceconomy.Main
+api-version: '1.21'
