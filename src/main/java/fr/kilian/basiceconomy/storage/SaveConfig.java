@@ -26,7 +26,7 @@ public class SaveConfig {
 
             config.set(path + ".base-price", item.getBasePrice());
             config.set(path + ".current-price", item.getBuyPrice());
-            config.set(path + ".sell-price", item.getBuyPrice());
+            config.set(path + ".sell-price", item.getSellPrice());
             config.set(path + ".demand", item.getDemand());
             config.set(path + ".supply", item.getSupply());
             config.set(path + ".category", item.getCategory().name());
